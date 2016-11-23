@@ -39,10 +39,8 @@ public class Main {
             //Dicho comando crea un disco virtual
             if(comando.toLowerCase().compareTo("create") == 0){
                 try{
-                    int cantSectores =0;
-                    cantSectores = Integer.parseInt(pTokens.nextElement().toString());
-                    int tamSector=0;
-                    tamSector = Integer.parseInt(pTokens.nextElement().toString());
+                    int cantSectores = Integer.parseInt(pTokens.nextElement().toString());
+                    int tamSector = Integer.parseInt(pTokens.nextElement().toString());
                     pFileSystem.create(cantSectores, tamSector);  
                     return false;
                 }
@@ -231,7 +229,7 @@ public class Main {
             
             //Validación de error, para comandos inválidos
             else{
-                System.out.println("Comando invalido");
+                System.out.println("\nComando invalido\n");
                 //pFileSystem.getDisk().imprimirInfoDisco();
                 return false;
             }
@@ -239,7 +237,24 @@ public class Main {
         return false;
     }
     
-    
+    public static void iniciarFileSystem(FileSystem fs, String rutaDisco, boolean ciclo){
+        try{
+            while(ciclo){
+                System.out.print(fs.getRutaActual()+" ");
+                StringTokenizer opcion = new StringTokenizer(leerEntradaString(), " ");
+                boolean resultado = analizarOpcion(opcion,fs);
+                if(resultado){
+                    ciclo = false;
+                }
+
+                fs.getDisk().crearArchivoInfoDisco(rutaDisco);
+            }
+        }
+        catch(Exception ex){
+            System.out.println("\nError, debe crear el disco duro, antes de utilizar cualquier comando.\n");  
+            iniciarFileSystem(fs,rutaDisco,ciclo);
+        }         
+    }
     
     public static void main(String args[]){
         System.out.println("Indique la ruta donde se almacenara el disco: \n");        
@@ -248,15 +263,7 @@ public class Main {
         FileSystem fs = new FileSystem();
         boolean ciclo = true;
         fs.help();
-        while(ciclo){
-            System.out.print(fs.getRutaActual()+" ");
-            StringTokenizer opcion = new StringTokenizer(leerEntradaString(), " ");
-            boolean resultado = analizarOpcion(opcion,fs);
-            if(resultado){
-                ciclo = false;
-            }
-            
-            fs.getDisk().crearArchivoInfoDisco(rutaDisco);
-        }
+        iniciarFileSystem(fs,rutaDisco,ciclo);
+       
     }
 }

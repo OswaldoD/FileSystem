@@ -683,7 +683,7 @@ public class FileSystem implements Funciones {
                        "\nNota: *tipo = -rv, -vv, -vr\n" +
                        "        *Los nombres de los archivos en las rutas deben incluir la extensión\n"+
                        "10- MoVer rutaOrigen rutaDestino \n" +
-                       "11- ReMove nombreArchivo o nombreDirectorio\n"+
+                       "11- ReMove nombreArchivo(sin extensión) o nombreDirectorio\n"+
                        "12- FIND nombreArchivo.extension o nombreDirectorio. \n" +
                        "13- TREE \n" +
                        "14- cambiarDIR \n" +
