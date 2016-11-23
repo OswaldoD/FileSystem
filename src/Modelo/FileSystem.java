@@ -566,11 +566,11 @@ public class FileSystem implements Funciones {
         
         if(tipoBusqueda == 1){
             // significa que hay que buscar todos los archivos que sean de esa extension
-            find_aux(extension,nuevo.getContenido());
+            find_aux_all(extension,nuevo.getContenido());
         }
         else if(tipoBusqueda == 2){
             // significa que hay que buscar un archivo por su nombre y extension
-            find_aux(nombre,extension,nuevo.getContenido());
+            find_aux_file(nombre,extension,nuevo.getContenido());
         }
         else{
             // significa que estamos buscando un directorio
@@ -578,7 +578,7 @@ public class FileSystem implements Funciones {
         }
     }
     
-    public void find_aux(String pExtension, ContenidoDirectorio pContenido){
+    public void find_aux_all(String pExtension, ContenidoDirectorio pContenido){
         for(Object obj:pContenido){
             try{
                 // vemos si el obj actual es un archivo
@@ -592,12 +592,35 @@ public class FileSystem implements Funciones {
                 // si es un directorio entonces lo que hacemos es llamar recursivamente a 
                 // esta funcion pero con el contenido del directorio del objeto actual
                 Directorio dir = (Directorio)obj;
-                find_aux(pExtension,dir.getContenido());
+                find_aux_all(pExtension,dir.getContenido());
             }
         }
     }
     
     public void find_aux(String pNombre, String pExtension, ContenidoDirectorio pContenido){
+        for(Object obj:pContenido){
+//            try{
+//                // vemos si es un archivo
+//                Archivo arc = (Archivo)obj;
+//                if(arc.getExtension().compareTo(pExtension) == 0 && arc.getNombre().compareTo(pNombre) == 0){
+//                    // si coinciden los nombres y la extension entonces imprimimos la info
+//                    System.out.println(arc.getUbicacion()+"/"+arc.getNombre()+arc.getExtension());
+//                }
+//            }
+           // catch(Exception ex){
+                // sino entonces era un directorio
+                Directorio dir = (Directorio)obj;
+                if(dir.getNombre().compareTo(pNombre) == 0)
+                    // si coincide el nombre del directorio entonces imprimimos la info
+                    System.out.println(dir.getUbicacion()+"/" +dir.getNombre());
+                // buscamos recursivamente en este directorio para ver si hay mas archivos o carpetas
+                // con el mismo nombre
+                //find_aux(pNombre,pExtension,dir.getContenido());
+            //}
+        }
+    }
+    
+        public void find_aux_file(String pNombre, String pExtension, ContenidoDirectorio pContenido){
         for(Object obj:pContenido){
             try{
                 // vemos si es un archivo
@@ -615,7 +638,7 @@ public class FileSystem implements Funciones {
                     System.out.println(dir.getUbicacion()+"/" +dir.getNombre());
                 // buscamos recursivamente en este directorio para ver si hay mas archivos o carpetas
                 // con el mismo nombre
-                //find_aux(pNombre,pExtension,dir.getContenido());
+                find_aux_file(pNombre,pExtension,dir.getContenido());
             }
         }
     }

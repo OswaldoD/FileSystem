@@ -238,7 +238,7 @@ public class Main {
     }
     
     public static void iniciarFileSystem(FileSystem fs, String rutaDisco, boolean ciclo){
-        try{
+//        try{
             while(ciclo){
                 System.out.print(fs.getRutaActual()+" ");
                 StringTokenizer opcion = new StringTokenizer(leerEntradaString(), " ");
@@ -249,11 +249,11 @@ public class Main {
 
                 fs.getDisk().crearArchivoInfoDisco(rutaDisco);
             }
-        }
-        catch(Exception ex){
-            System.out.println("\nError, debe crear el disco duro, antes de utilizar cualquier comando.\n");  
-            iniciarFileSystem(fs,rutaDisco,ciclo);
-        }         
+//        }
+//        catch(Exception ex){
+//            System.out.println("\nError, debe crear el disco duro, antes de utilizar cualquier comando.\n");  
+//            iniciarFileSystem(fs,rutaDisco,ciclo);
+//        }         
     }
     
     public static void main(String args[]){
