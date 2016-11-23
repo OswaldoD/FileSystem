@@ -119,7 +119,7 @@ public class Main {
             //Encargado de seleccionar un archivo y cambiarle el nombre
             else if(comando.toLowerCase().compareTo("modfile")==0){
                 try{
-                    pFileSystem.modFile(pTokens.nextElement().toString(), pTokens.nextElement().toString());
+                    pFileSystem.modFile(pTokens.nextElement().toString(), pTokens.nextToken("").toString());                    
                 }
                 catch(Exception ex){
                     System.out.println("\nError, parámetros incorrectos.\n");
