@@ -203,7 +203,10 @@ public class FileSystem implements Funciones {
                 if(arc.getNombre().compareTo(pNombre) == 0){
                     // si el nombre es igual entonces mostramos las propiedades del archivo
                     // y terminamos la busqueda
-                    System.out.println(arc.verPropiedades());
+                    System.out.println("\n*******************************");
+                    System.out.println("****Propiedades del Archivo****");
+                    System.out.println("*******************************");
+                    System.out.println(arc.verPropiedades()+"\n");
                     return;
                 }
             }
@@ -664,9 +667,10 @@ public class FileSystem implements Funciones {
     }
     
     public void help(){
-        String ayuda = "********************************\n"+
-                       "** Como utilizar los comandos** \n " +
-                       "********************************\n"+                       
+        String ayuda = "\n**********************************\n"+
+                       "**** Guía en el uso de comandos **** \n " +
+                       "**********************************\n"+  
+                       "A continuación se enumeran todos los comandos y su descripción de uso:\n\n"+
                        "1- CREATE cantidadSectores tamanoSector \n"+
                        "2- FILE nombreArchivo extensionArchivo contenidoArchivo \n"+
                        "3- MKDIR nombreDirectorio\n" + 
@@ -675,13 +679,15 @@ public class FileSystem implements Funciones {
                        "6- ModFILE nombreArchivo nuevoContenido\n"+
                        "7- VerPropiedades nombreArchivo\n" +
                        "8- ContFile nombreArchivo\n" + 
-                       "9- CoPY -tipo rutaOrigen rutaDestino \n tipo = rv, vv, vr\n"+
+                       "9- CoPY tipo rutaOrigen rutaDestino \n->tipo = -rv, -vv, -vr\n"+
                        "10- MoVer rutaOrigen rutaDestino \n" +
                        "11- ReMove nombreArchivo o nombreDirectorio\n"+
                        "12- FIND nombreArchivo.extension o nombreDirectorio. \n" +
                        "13- TREE \n" +
                        "14- cambiarDIR \n" +
-                       "15- DISK \n"
+                       "15- DISK \n"+
+                       "16- help\n"+
+                       "17- exit\n"
                         ;
         System.out.println(ayuda);
     }

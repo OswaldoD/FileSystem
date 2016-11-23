@@ -91,7 +91,11 @@ public class Propiedades {
 
     @Override
     public String toString() {
-        return "Nombre=" + _Nombre + ", Ubicacion=" + _Ubicacion + ", Tamaño=" + _Tamaño + ", Usuario=" + _Usuario + ", FechaCreacion=" + _FechaCreacion + ", UltimaModificacion=" + _UltimaModificacion;
+        if(_UltimaModificacion==null){
+            _UltimaModificacion=_FechaCreacion;
+        }
+        return "->Nombre = " + _Nombre +"\n"+ "->Ubicacion = " + _Ubicacion+"\n" + 
+                "->Tamaño = " + _Tamaño+"\n" + "->Fecha de la Creacion = " + _FechaCreacion+"\n" + "->Ultima Fecha de Modificacion = " + _UltimaModificacion+"\n";
     }
     
     

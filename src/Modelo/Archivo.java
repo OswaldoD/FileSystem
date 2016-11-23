@@ -42,7 +42,7 @@ public class Archivo extends Propiedades{
 
     @Override
     public String toString() {
-        return ", _Extension=" + _Extension;
+        return "->Extension = " + _Extension;
     }
     
     

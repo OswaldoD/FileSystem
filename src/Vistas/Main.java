@@ -36,13 +36,16 @@ public class Main {
             String comando = pTokens.nextElement().toString();
             
             //Comando CREATE cantidadSectores tamanoSectores
-            if(comando.toLowerCase().compareTo("create") == 0){
+            //Dicho comando crea un disco virtual
+            if(comando.toLowerCase().compareTo("create") == 0){                            
                 int cantSectores = Integer.parseInt(pTokens.nextElement().toString());
                 int tamSector = Integer.parseInt(pTokens.nextElement().toString());
-                pFileSystem.create(cantSectores, tamSector);
+                pFileSystem.create(cantSectores, tamSector);  
+                return false;
             }
             
             //Comando FILE nombreArchivo extensionArchivo contenidoArchivo
+            //Comando encargado de crear un archivo
             else if(comando.toLowerCase().compareTo("file") == 0){
                 try{
                     // el orden de los parametros seria: file nombreArchivo extension contenido
@@ -61,15 +64,8 @@ public class Main {
                
             }
             
-            // Comando listaDIR
-            else if(comando.toLowerCase().compareTo("listardir") == 0){
-                try{
-                    pFileSystem.listDir();
-                }
-                catch(Exception ex){
-                    
-                }
-            }
+            //Comando MKDIR nombreDirectorio
+            //Crea un directorio en el directorio Actual
             else if(comando.toLowerCase().compareTo("mkdir") == 0){
                 try{
                     pFileSystem.mkdir(pTokens.nextElement().toString());
@@ -78,6 +74,18 @@ public class Main {
                 }
                 
             }
+            
+            //Comnado CambiarDIR
+            else if(comando.toLowerCase().compareTo("cambiardir") == 0){
+                try{
+                    pFileSystem.cambiarDIR(pTokens.nextElement().toString());
+                }
+                catch(Exception ex){
+                    
+                }
+            }            
+            
+            //Comando extra cd, conla misma funcionaldidad que als terminales de los sistemas operativos
             else if(comando.toLowerCase().compareTo("cd") == 0){
                 try{
                     pFileSystem.cd(pTokens.nextElement().toString());
@@ -86,39 +94,66 @@ public class Main {
                     
                 }
             }
-            else if(comando.toLowerCase().compareTo("cambiardir") == 0){
+            
+            // Comando listarDIR 
+            //Lista los archivos y directorios dentro del directorio actual
+            else if(comando.toLowerCase().compareTo("listardir") == 0){
                 try{
-                    pFileSystem.cambiarDIR(pTokens.nextElement().toString());
+                    pFileSystem.listDir();
                 }
                 catch(Exception ex){
-                    
+                    System.out.println("\nError, comándo incorrecto.\n");
+                    //System.out.println(ex.getMessage());
+                    return false;                    
                 }
             }
+            
+            //Comando ModFile
+            //Encargado de seleccionar un archivo y cambiarle el nombre
             else if(comando.toLowerCase().compareTo("modfile")==0){
                 try{
                     pFileSystem.modFile(pTokens.nextElement().toString(), pTokens.nextElement().toString());
                 }
                 catch(Exception ex){
-                    
+                    System.out.println("\nError, parámetros incorrectos.\n");
+                    //System.out.println(ex.getMessage());
+                    return false;                      
                 }
             }
+            
+            //Comando VerPropiedades
+            //Este comando permite ver las propiedades de un archivo
             else if(comando.toLowerCase().compareTo("verpropiedades") == 0){
                 try{
                     pFileSystem.properties(pTokens.nextElement().toString());
                 }
                 catch(Exception ex){
-                
+                    System.out.println("\nError, comándo incorrecto.\n");
+                    //System.out.println(ex.getMessage());
+                    return false;                  
                 }
             }
+            
+            //Comando ContFile
+            //Permite ver el contenido de un determinado archivo
             else if(comando.toLowerCase().compareTo("contfile") ==0){
                 try{
                     pFileSystem.fileCont(pTokens.nextElement().toString());
                 }
                 catch(Exception ex){
-                
+                    System.out.println("\nError, parámetros incorrectos.\n");
+                    //System.out.println(ex.getMessage());
+                    return false;                    
                 }
             }
             
+            //Comando CoPY
+            //Comando encargado de copiar archivos o directorios de tres formas
+            /**
+             * Ruta Real a Ruta Virtual = rv
+             * Ruta Virtual a Ruta Real = vr
+             * Ruta Virtual a Ruta Virtual = vv
+            **/
             else if(comando.toLowerCase().compareTo("copy") == 0){
                 try{
                     String tipo = pTokens.nextElement().toString();
@@ -144,7 +179,9 @@ public class Main {
                     }
                 }
                 catch(Exception ex){
-                    
+                    System.out.println("\nError, parámetros incorrectos.\n");
+                    //System.out.println(ex.getMessage());
+                    return false;                       
                 }
             }
             else if(comando.toLowerCase().compareTo("mover") == 0){
@@ -155,26 +192,39 @@ public class Main {
             else if(comando.toLowerCase().compareTo("remove") == 0){
                 pFileSystem.remove(pTokens.nextElement().toString());
             }
+            
+            
             else if(comando.toLowerCase().compareTo("find") == 0){
                 pFileSystem.find(pTokens.nextElement().toString());
             }
             
+            //Comando TREE
+            //Despliega de forma simulada un árbol con la estructura de archivo que almacena el File System
             else if(comando.toLowerCase().compareTo("tree") == 0){
                 pFileSystem.tree();
             }
+            
+            //Comando DISK para la funcionalidad del apartado denominado DISCO VIRTUAL
             else if(comando.toLowerCase().compareTo("disk") == 0){
                 pFileSystem.getDisk().imprimirInfoDisco();
             }
+            
+            //Comando help, le mostrará al usuario un menú de ayuda
+            //con la orientación del uso de lo comandos
             else if(comando.toLowerCase().compareTo("help") == 0){
                 pFileSystem.help();
             }
+            
+            //Comando exit, sale del sistema y de al ejecución del programa
             else if(comando.toLowerCase().compareTo("exit") == 0){
                 return true;
             }
+            
+            //Validación de error, para comandos inválidos
             else{
                 System.out.println("Comando invalido");
                 //pFileSystem.getDisk().imprimirInfoDisco();
-                //return false;
+                return false;
             }
         }
         return false;

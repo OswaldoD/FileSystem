@@ -131,7 +131,7 @@ public class DiscoVirtual {
             frase.close();
             objetoarchivo.close();
         } catch(IOException ioe){
-            ioe.printStackTrace();
+            ioe.printStackTrace();            
         }    
     }
     
