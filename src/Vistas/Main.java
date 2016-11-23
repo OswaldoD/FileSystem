@@ -16,6 +16,7 @@ import java.util.StringTokenizer;
  * @author Phoenix
  */
 public class Main {
+    
     public static String leerEntradaString(){
         String p= "";
         try
@@ -33,27 +34,34 @@ public class Main {
     public static boolean analizarOpcion(StringTokenizer pTokens,FileSystem pFileSystem){
         while(pTokens.hasMoreElements()){
             String comando = pTokens.nextElement().toString();
+            
+            //Comando CREATE cantidadSectores tamanoSectores
             if(comando.toLowerCase().compareTo("create") == 0){
                 int cantSectores = Integer.parseInt(pTokens.nextElement().toString());
                 int tamSector = Integer.parseInt(pTokens.nextElement().toString());
                 pFileSystem.create(cantSectores, tamSector);
             }
+            
+            //Comando FILE nombreArchivo extensionArchivo contenidoArchivo
             else if(comando.toLowerCase().compareTo("file") == 0){
                 try{
                     // el orden de los parametros seria: file nombreArchivo extension contenido
                     String nombreArchivo = pTokens.nextElement().toString();
-                    String extensionArchivo = pTokens.nextElement().toString();
-                    String contenidoArchivo = pTokens.nextElement().toString();
+                    String extensionArchivo = pTokens.nextElement().toString();                    
+                    String contenidoArchivo = pTokens.nextToken("");
                     pFileSystem.file(contenidoArchivo, extensionArchivo, nombreArchivo);
                     //pFileSystem.getDisk().imprimirInfoDisco();
                     return false;
                 }
                 catch(Exception ex){
-                    System.out.println(ex.getMessage());
+                    System.out.println("\nError, parámetros incorrectos.\n");
+                    //System.out.println(ex.getMessage());
                     return false;
                 }
                
             }
+            
+            // Comando listaDIR
             else if(comando.toLowerCase().compareTo("listardir") == 0){
                 try{
                     pFileSystem.listDir();
