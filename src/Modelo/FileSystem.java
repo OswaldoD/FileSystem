@@ -615,7 +615,7 @@ public class FileSystem implements Funciones {
                     System.out.println(dir.getUbicacion()+"/" +dir.getNombre());
                 // buscamos recursivamente en este directorio para ver si hay mas archivos o carpetas
                 // con el mismo nombre
-                find_aux(pNombre,pExtension,dir.getContenido());
+                //find_aux(pNombre,pExtension,dir.getContenido());
             }
         }
     }
@@ -676,10 +676,12 @@ public class FileSystem implements Funciones {
                        "3- MKDIR nombreDirectorio\n" + 
                        "4- cd nombreDirectorio ó .. \n"  +
                        "5- ListarDIR \n" +
-                       "6- ModFILE nombreArchivo nuevoContenido\n"+
-                       "7- VerPropiedades nombreArchivo\n" +
-                       "8- ContFile nombreArchivo\n" + 
-                       "9- CoPY tipo rutaOrigen rutaDestino \n->tipo = -rv, -vv, -vr\n"+
+                       "6- ModFILE nombreArchivo(sin extensión) nuevoContenido\n"+
+                       "7- VerPropiedades nombreArchivo(sin extensión)\n" +
+                       "8- ContFile nombreArchivo(sin extensión)\n" + 
+                       "9- CoPY tipo rutaOrigen rutaDestino \n"+
+                       "\nNota: *tipo = -rv, -vv, -vr\n" +
+                       "        *Los nombres de los archivos en las rutas deben incluir la extensión\n"+
                        "10- MoVer rutaOrigen rutaDestino \n" +
                        "11- ReMove nombreArchivo o nombreDirectorio\n"+
                        "12- FIND nombreArchivo.extension o nombreDirectorio. \n" +

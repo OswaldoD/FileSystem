@@ -37,11 +37,20 @@ public class Main {
             
             //Comando CREATE cantidadSectores tamanoSectores
             //Dicho comando crea un disco virtual
-            if(comando.toLowerCase().compareTo("create") == 0){                            
-                int cantSectores = Integer.parseInt(pTokens.nextElement().toString());
-                int tamSector = Integer.parseInt(pTokens.nextElement().toString());
-                pFileSystem.create(cantSectores, tamSector);  
-                return false;
+            if(comando.toLowerCase().compareTo("create") == 0){
+                try{
+                    int cantSectores =0;
+                    cantSectores = Integer.parseInt(pTokens.nextElement().toString());
+                    int tamSector=0;
+                    tamSector = Integer.parseInt(pTokens.nextElement().toString());
+                    pFileSystem.create(cantSectores, tamSector);  
+                    return false;
+                }
+                catch(Exception ex){
+                    System.out.println("\nError, parámetros incorrectos.\n");
+                    //System.out.println(ex.getMessage());
+                    return false;
+                }                    
             }
             
             //Comando FILE nombreArchivo extensionArchivo contenidoArchivo
